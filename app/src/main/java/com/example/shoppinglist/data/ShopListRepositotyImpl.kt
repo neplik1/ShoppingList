@@ -9,6 +9,13 @@ object ShopListRepositotyImpl : ShopListRepository {
 
     private var autoIncrementId = 0
 
+    init {
+        for(i in 1 until 10 ){
+            val item = ShopItem("Name $i",i,true)
+            addShopItem(item)
+        }
+    }
+
     override fun getShopList(): List<ShopItem> {
         return shopList.toList()
     }
