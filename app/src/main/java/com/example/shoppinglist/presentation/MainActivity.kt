@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.shoppinglist.R
 
 class MainActivity : AppCompatActivity() {
-
+private var count = 0
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +16,11 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shoplist.observe(this){
             Log.d("Test",it.toString())
+            if( count == 0){
+                count++
+                val item = it[0]
+                viewModel.changeEnableState(item)
+            }
         }
-        viewModel.getShopList()
     }
 }
