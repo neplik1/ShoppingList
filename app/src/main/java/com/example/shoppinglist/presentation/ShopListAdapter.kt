@@ -17,6 +17,7 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
             field = value
             notifyDataSetChanged()
         }
+    var onShopItemLongClickListener: ((ShopItem) -> Unit)? = null
 
     class ShopItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvName = view.findViewById<TextView>(R.id.tv_name)
@@ -37,6 +38,7 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
         val shopItem = shopList[position]
         holder.view.setOnLongClickListener {
+           onShopItemLongClickListener?.invoke(shopItem)
             true
         }
         holder.tvName.text = shopItem.name
@@ -55,6 +57,7 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
             )
         )
     }
+
     override fun getItemCount(): Int {
         return shopList.size
     }
@@ -68,10 +71,14 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         }
     }
 
+    interface OnShopItemLongClickListener {
+        fun onShopItemLongClick(shopItem: ShopItem)
+    }
+
     companion object {
         const val VIEW_ITEM_ENABLED = 0
         const val VIEW_ITEM_DISABLED = 1
 
-        const val MAX_POOL_SIZE =15
+        const val MAX_POOL_SIZE = 15
     }
 }
