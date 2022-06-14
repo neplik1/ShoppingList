@@ -67,7 +67,7 @@ class FragmentShopItem(
             tilCount.error = message
         }
         viewModel.closeScreen.observe(viewLifecycleOwner) {
-            //finish()
+            activity?.onBackPressed()
         }
     }
 
@@ -130,6 +130,10 @@ class FragmentShopItem(
         }
     }
 
+    fun newInstanseEditItem() {
+
+    }
+
     private fun initeViews(view: View) {
         tilName = view.findViewById(R.id.til_name)
         tilCount = view.findViewById(R.id.itl_count)
@@ -145,6 +149,13 @@ class FragmentShopItem(
         private const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOW = ""
 
+        fun newInstanseEditItem(shopItemId: Int): FragmentShopItem {
+            return FragmentShopItem(MODE_EDIT, shopItemId)
+        }
+
+        fun newInstanseAddItem(): FragmentShopItem {
+            return FragmentShopItem(MODE_ADD)
+        }
 
         fun newIntentAddItem(context: Context): Intent {
             val intent = Intent(context, ShopItemActivity::class.java)
@@ -160,5 +171,4 @@ class FragmentShopItem(
         }
     }
 
-}
 }
