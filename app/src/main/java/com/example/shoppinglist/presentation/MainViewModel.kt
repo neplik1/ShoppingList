@@ -8,6 +8,7 @@ import com.example.shoppinglist.domain.ShopItem
 import com.example.shoppinglist.domain.UpdateShopItemUseCase
 
 class MainViewModel : ViewModel() {
+
     private val repository = ShopListRepositotyImpl
     private val getShopListUseCase = GetShopListUseCase(repository)
     private val deleteShopItemUseCase = DeleteShopItemUseCase(repository)
